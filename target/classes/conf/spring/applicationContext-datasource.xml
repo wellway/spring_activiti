@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd 
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+
+	<!-- 加载配置文件 -->
+	<context:property-placeholder location="classpath:jdbc.properties"></context:property-placeholder>
+	<context:component-scan base-package="yalongz.component.service.impl"></context:component-scan>
+	<!-- 数据库连接池 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="${jdbc.mysql.driverClassName}" />
+		<property name="url" value="${jdbc.mysql.url}" />
+		<property name="username" value="${jdbc.mysql.username}" />
+		<property name="password" value="${jdbc.mysql.password}" />
+		<property name="initialSize" value="${jdbc.mysql.initialSize}" />
+		<property name="maxActive" value="${jdbc.mysql.maxActive}" />
+		<property name="maxIdle" value="${jdbc.mysql.maxIdle}" />
+		<property name="minIdle" value="${jdbc.mysql.minIdle}" />
+		<property name="defaultAutoCommit" value="${jdbc.mysql.defaultAutoCommit}" />
+		<property name="removeAbandoned" value="${jdbc.mysql.removeAbandoned}" />
+		<property name="removeAbandonedTimeout" value="${jdbc.mysql.removeAbandonedTimeout}" />
+		<property name="logAbandoned" value="${jdbc.mysql.logAbandoned}" />
+		<property name="testWhileIdle" value="${jdbc.mysql.testWhileIdle}" />
+		<property name="validationQuery" value="${jdbc.mysql.validationQuery}" />
+		<property name="timeBetweenEvictionRunsMillis" value="${jdbc.mysql.timeBetweenEvictionRunsMillis}" />
+		<property name="numTestsPerEvictionRun" value="${jdbc.mysql.numTestsPerEvictionRun}" />
+	</bean>
+	<!-- 配置sqlsessionFactory -->
+	<bean id="sqlSessionFactory"
+		class="com.baomidou.mybatisplus.spring.MybatisSqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:conf/mybatis-config.xml" />
+		<property name="typeAliasesPackage" value="yalongz.entity" />
+		<property name="mapperLocations" value="classpath:mapper/*.xml" />
+
+		<property name="plugins">
+			<array>
+				<!-- 分页插件配置 -->
+				<bean id="paginationInterceptor"
+					class="com.baomidou.mybatisplus.plugins.PaginationInterceptor">
+					<property name="dialectType" value="PostgreSQL" />
+				</bean>
+			</array>
+		</property>
+		<!-- 全局配置注入 -->
+		<property name="globalConfig" ref="globalConfig" />
+	</bean>
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="yalongz.component.dao" />
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+	</bean>
+
+	<bean id="globalConfig" class="com.baomidou.mybatisplus.entity.GlobalConfiguration">
+		<property name="idType" value="0" />
+	</bean>
+	<!-- MyBatis 动态实现:DAO接口所在包名,Spring会自动查找其下的类 -->
+	<bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<!-- 对Dao 接口动态实现,需要知道接口在哪 -->
+		<property name="basePackage" value="yalongz.mapper" />
+	</bean>
+
+	<bean id="fcResource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>generator</value>
+				<value>messages</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="configurationHelper" class="yalongz.common.ConfigurationHelper">
+		<property name="messageSource" ref="fcResource" />
+	</bean>
+
+	<!-- bean id="dividedStatisticsDao" class="yalongz.component.dao.impl.DividedStatisticsDaoImpl">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean -->
+
+	
+	
+	
+	
+
+	
+
+</beans>
