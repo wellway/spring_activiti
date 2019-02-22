@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="leave">
+<select id="getLeave"  resultType="leave">
+	SELECT
+	id,
+	processInstanceId,
+	userId,
+	startTime,
+	endTime,
+	realityStartTime,
+	realityEndTime,
+	applyTime,
+	leaveType,
+	reason
+FROM leaves
+where userId =#{userId}
+
+</select>
+<insert id="insertLeave" parameterType="leave" >
+	INSERT INTO  leaves (
+	
+	processInstanceId,
+	userId,
+	startTime,
+	endTime,
+	realityStartTime,
+	realityEndTime,
+	applyTime,
+	leaveType,
+	reason) values(#{processInstanceId},
+#{userId},
+#{startTime},
+#{endTime},
+#{realityStartTime},
+#{realityEndTime},
+#{applyTime},
+#{leaveType},#{reason})
+
+</insert>
+
+</mapper>

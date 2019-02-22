@@ -20,12 +20,6 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<version>${log4j.version}</version>
@@ -82,6 +76,17 @@
 			<artifactId>spring-websocket</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+		<!--  <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+            <version>${spring-data-jpa.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>junit</groupId>
+                    <artifactId>junit-dep</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency> -->
 		<!-- mybatis核心包 -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
@@ -199,7 +204,7 @@
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
-			<version>1.2.5</version>
+			<version>1.2.56</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
@@ -247,7 +252,105 @@
 			<artifactId>poi-excelant</artifactId>
 			<version>3.12</version>
 		</dependency>
+		<!-- activiti -->
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-engine</artifactId>
+			<version>${activiti.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-spring</artifactId>
+			<version>${activiti.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-json-converter</artifactId>
+			<version>${activiti.version}</version>
+		</dependency>
 
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-explorer</artifactId>
+			<version>${activiti.version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>vaadin</artifactId>
+					<groupId>com.vaadin</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>dcharts-widget</artifactId>
+					<groupId>org.vaadin.addons</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>activiti-simple-workflow</artifactId>
+					<groupId>org.activiti</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-modeler</artifactId>
+			<version>${activiti.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-rest</artifactId>
+			<version>${activiti.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-diagram-rest</artifactId>
+			<version>${activiti.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-cxf</artifactId>
+			<version>${activiti.version}</version>
+		</dependency>
+		<dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
+        </dependency>
+           <!-- PERSISTENCE begin -->
+        <!-- hibernate -->
+  <!--       <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate.javax.persistence</groupId>
+            <artifactId>hibernate-jpa-2.0-api</artifactId>
+            <version>1.0.1.Final</version>
+        </dependency> -->
+          <dependency>
+            <groupId>org.jodd</groupId>
+            <artifactId>jodd</artifactId>
+            <version>3.3.2</version>
+        </dependency>
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>${joda-time.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>1.8.3</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
 	</dependencies>
 	<properties>
 		<mybatis.version>3.4.2</mybatis.version>
@@ -261,12 +364,17 @@
 		<slf4j.version>1.7.2</slf4j.version>
 		<servlet.version>4.0.0-b07</servlet.version>
 		<jsp-version>2.3.1</jsp-version>
-		<spring.version>4.3.6.RELEASE</spring.version>
+		<spring.version>4.2.5.RELEASE</spring.version>
 		<jackson.version>1.9.7</jackson.version>
 		<json.version>1.1</json.version>
 		<ehcache.version>2.10.4</ehcache.version>
 		<aspectj.version>1.5.4</aspectj.version>
 		<commons.dbcp.version>1.2.1</commons.dbcp.version>
 		<postgre.version>9.4-1201-jdbc41</postgre.version>
+		<activiti.version>5.22.0</activiti.version>
+		<spring-data-jpa.version>1.9.1.RELEASE</spring-data-jpa.version>
+		  <hibernate.version>4.2.5.Final</hibernate.version>
+		 <guava.version>17.0</guava.version>
+		 <joda-time.version>2.1</joda-time.version>
 	</properties>
 </project>

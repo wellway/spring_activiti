@@ -9,7 +9,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import yalongz.entity.User;
+import yalongz.entity.UserInfo;
 import yalongz.mapper.UserMapper;
 
 @Controller
@@ -20,8 +20,8 @@ public class LoginController {
 
 	@RequestMapping("/index.do")
 	@ResponseBody
-	public User index(HttpServletRequest request, HttpServletResponse response, ModelMap model) {
-		User user = userMapper.selectById("1");
+	public UserInfo index(HttpServletRequest request, HttpServletResponse response, ModelMap model) {
+		UserInfo user = userMapper.selectById("11");
 		return user;
 	}
 

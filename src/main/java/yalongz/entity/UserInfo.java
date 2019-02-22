@@ -2,7 +2,7 @@ package yalongz.entity;
 
 import java.io.Serializable;
 
-public class User implements Serializable {
+public class UserInfo implements Serializable {
 	/**
 	 * 
 	 */

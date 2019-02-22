@@ -44,7 +44,7 @@
 				<!-- 分页插件配置 -->
 				<bean id="paginationInterceptor"
 					class="com.baomidou.mybatisplus.plugins.PaginationInterceptor">
-					<property name="dialectType" value="PostgreSQL" />
+					<property name="dialectType" value="MySQL" />
 				</bean>
 			</array>
 		</property>
@@ -59,6 +59,10 @@
 	<bean id="globalConfig" class="com.baomidou.mybatisplus.entity.GlobalConfiguration">
 		<property name="idType" value="0" />
 	</bean>
+	
+
+
+
 	<!-- MyBatis 动态实现:DAO接口所在包名,Spring会自动查找其下的类 -->
 	<bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<!-- 对Dao 接口动态实现,需要知道接口在哪 -->
@@ -74,20 +78,17 @@
 			</list>
 		</property>
 	</bean>
-
-	<bean id="configurationHelper" class="yalongz.common.ConfigurationHelper">
-		<property name="messageSource" ref="fcResource" />
+	<!-- (事务管理)transaction manager, use JtaTransactionManager for global tx --> 
+ 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"> 
+ 		<property name="dataSource" ref="dataSource" /> 
+ 	</bean>
+ 	
+	<bean id="workflowService" class="yalongz.component.service.impl.LeaveWorkflowServiceImpl">
+		<property name="baseDao" ref="workflowDao"></property>
 	</bean>
-
-	<!-- bean id="dividedStatisticsDao" class="yalongz.component.dao.impl.DividedStatisticsDaoImpl">
+	
+	<bean id="workflowDao" class="yalongz.component.dao.impl.LeaveWorkflowDaoImpl">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
-	</bean -->
-
-	
-	
-	
-	
-
-	
+	</bean>
 
 </beans>
